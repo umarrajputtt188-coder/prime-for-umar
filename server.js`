@@ -1,0 +1,63 @@
+
+const http = require("http");
+
+const PORT = process.env.PORT || 3000;
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, {
+    "Content-Type": "text/html; charset=utf-8"
+  });
+
+  if (req.url === "/") {
+    res.end(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+        <title>My Website</title>
+      </head>
+      <body>
+        <h1>Welcome to My Website</h1>
+        <p>Node.js server is running.</p>
+        <a href="/login">Login</a>
+      </body>
+      </html>
+    `);
+  } else if (req.url === "/login") {
+    res.end(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+        <title>Demo Login</title>
+      </head>
+      <body>
+        <h2>Demo Login</h2>
+        <form>
+          <label>Email</label>
+          <input type="email" required>
+          <br><br>
+          <label>Password</label>
+          <input type="password" required>
+          <br><br>
+          <button type="submit">Login</button>
+        </form>
+        <p>This is a demo form, not real authentication.</p>
+      </body>
+      </html>
+    `);
+  } else {
+    res.writeHead(404, {
+      "Content-Type": "text/plain; charset=utf-8"
+    });
+    res.end("Page not found");
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
